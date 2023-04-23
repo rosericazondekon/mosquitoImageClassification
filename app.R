@@ -1,3 +1,11 @@
+#------------------------------------------------------------------------------------
+# Mosquito image Classification Deployment App
+# https://rosericazondekon.github.io/posts/mosquito-image-classification-with-torch/
+#
+# Atlanta, April 2023
+# Author: G. Roseric Azondekon (roseric_2000@yahoo.fr)
+#------------------------------------------------------------------------------------
+
 options(shiny.maxRequestSize = 100 * 1024^2)
 
 suppressPackageStartupMessages({
@@ -13,10 +21,13 @@ suppressPackageStartupMessages({
   lapply(libs, library, character.only = TRUE, quietly = TRUE)
 })
 
+# Load torch model
 model <- torch_load("mosquito_class_model.rt")
 
+# Define class names
 class_names <- c("Aedes aegypti", "Anopheles stephensi", "Culex quinquefasciatus")
 
+# Define helper functions
 predict_species <- function(path, dl_model = model, all_classes = class_names){
   img_tensor <- path %>% 
     jpeg::readJPEG() %>% 
@@ -40,6 +51,7 @@ softmax <- function(x, dim=1) {
   exp(x - max(x, dim=dim)) / sum(exp(x - max(x, dim=dim)), dim=dim)
 }
 
+# Front-end User Interface
 ui <- navbarPage(
   title = "Mosquito Specie Prediction App",
   sidebarLayout(
@@ -59,6 +71,7 @@ ui <- navbarPage(
   )
 )
 
+#Back-end server 
 server <- function(input, output) {
   output$image_ui <- renderUI({
     file <- input$file1
@@ -120,4 +133,5 @@ server <- function(input, output) {
   })
 }
 
+# Putting it altogether
 shinyApp(ui, server)
