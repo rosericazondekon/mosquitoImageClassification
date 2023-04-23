@@ -32,7 +32,7 @@ predict_species <- function(path, dl_model = model, all_classes = class_names){
   img_tensor <- path %>% 
     jpeg::readJPEG() %>% 
     transform_to_tensor() %>%
-    (function(x) x$to(device = device)) %>% 
+    (function(x) x$to(device = "cpu")) %>% 
     transform_resize(size = c(256, 256)) %>% 
     transform_normalize(mean = c(0.485, 0.456, 0.406), std = c(0.229, 0.224, 0.225))
   
