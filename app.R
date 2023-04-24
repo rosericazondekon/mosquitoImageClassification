@@ -108,9 +108,9 @@ server <- function(input, output) {
           max = 100, 
           label = "Prediction certainty",
           symbol = "%",
-          sectors = gaugeSectors(success = c(50, 100), 
-                                 warning = c(30, 50),
-                                 danger = c(0, 30)))
+          sectors = gaugeSectors(success = c(90, 100), 
+                                 warning = c(58, 90),
+                                 danger = c(0, 58)))
   })
   
   output$gauge_ui <- renderUI({
