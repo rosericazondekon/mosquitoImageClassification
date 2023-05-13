@@ -8,3 +8,6 @@ Execute the following from your R console:
 ## From an R console
 shiny::runGitHub("mosquitoImageClassification", "rosericazondekon")
 ```
+
+## Getting Help
+If you encounter or identify a bug, please consider emailing the author at roseric_2000@yahoo.fr and/or [file an issue](https://github.com/rosericazondekon/mosquitoImageClassification/issues).
